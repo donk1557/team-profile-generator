@@ -29,7 +29,8 @@ const questions = inquire.prompt([
     },
 ]).then((data) =>{
   console.log(data);
-    // const content = manager(data); //Manager.js fxn
+    const content = manager(data); //Manager.js fxn
+    console.log(manager(data));
     // appendToFile("teamManager.html",content); //appendFile fs fxn
     round2Questions() //another prompt immediately starts
     
