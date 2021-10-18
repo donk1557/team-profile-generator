@@ -32,11 +32,7 @@ const questions = inquire
     },
   ])
   .then((data) => {
-    console.log(data);
-    managerInfo = new Manager(data.name, data.id, data.email, data.officeNumber); //Manager.js fxn
-    // team(content);
-    // console.log(content);
-    
+    managerInfo = new Manager(data.name, data.id, data.email, data.officeNumber); //Manager.js fxn 
     round2Questions(); //another prompt immediately starts
   });
 
@@ -92,9 +88,7 @@ function engineerPrompts() {
       },
     ])
     .then((data) => {
-      console.log(data);
       engArray.push(data);
-      // const content = new Engineer(data);
       round2Questions();
     });
 }
@@ -124,9 +118,7 @@ function internPrompts() {
       },
     ])
     .then((data) => {
-      console.log(data);
       intArray.push(data);
-      // const content = new Intern(data);
       round2Questions();
     });
 }
@@ -137,24 +129,24 @@ function writeToFile () {
   fs.writeFile("./src/test.html", content, (err) =>
   err ? console.error(err) : console.log('Manager Added'));
 
-  console.log(engArray);
-  console.log("----------");
   engArray.forEach(function(engArray){
-    console.log(engArray);
     let engData = new Engineer(engArray.name, engArray.id, engArray.email, engArray.githubUsername);
     let content = team.appendEng(engData);
     fs.appendFile("./src/test.html", content, (err) =>
     err ? console.error(err) : console.log('Engineer Added'));
   })
-  console.log("Outer: ", intArray);
+
   intArray.forEach(function(intArray){
-    console.log("Hello: ", intArray.name, intArray.id, intArray.email, intArray.school);
     let intData = new Intern(intArray.name, intArray.id, intArray.email, intArray.school);
     let content = team.appendInt(intData);
     fs.appendFile("./src/test.html", content, (err) =>
     err ? console.error(err) : console.log('Intern Added'));
   })
   
+  final();
+}
+
+function final () {
   fs.appendFile("./src/test.html", team.ender(), (err) =>
   err ? console.error(err) : console.log('HTML Complete!'));
 }
