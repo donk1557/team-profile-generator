@@ -32,8 +32,8 @@ const questions = inquire
     },
   ])
   .then((data) => {
-    managerInfo = new Manager(data.name, data.id, data.email, data.officeNumber); //Manager.js fxn 
-    round2Questions(); //another prompt immediately starts
+    managerInfo = new Manager(data.name, data.id, data.email, data.officeNumber); //Manager class file 
+    round2Questions(); //menu prompts for Engineer & Intern immediately starts
   });
 
 function round2Questions() {
@@ -88,7 +88,7 @@ function engineerPrompts() {
       },
     ])
     .then((data) => {
-      engArray.push(data);
+      engArray.push(data);   //collected responses go in empty array
       round2Questions();
     });
 }
@@ -118,32 +118,32 @@ function internPrompts() {
       },
     ])
     .then((data) => {
-      intArray.push(data);
+      intArray.push(data);  //responses go in empty array
       round2Questions();
     });
 }
 
 function writeToFile () {
-  let content = team.createTeam(managerInfo);
+  let content = team.createTeam(managerInfo); //teamMaker file
 
-  fs.writeFile("./src/test.html", content, (err) =>
+  fs.writeFile("./src/test.html", content, (err) =>            //writes first part of html
   err ? console.error(err) : console.log('Manager Added'));
 
   engArray.forEach(function(engArray){
     let engData = new Engineer(engArray.name, engArray.id, engArray.email, engArray.githubUsername);
-    let content = team.appendEng(engData);
-    fs.appendFile("./src/test.html", content, (err) =>
+    let content = team.appendEng(engData);  //teamMaker fxn code
+    fs.appendFile("./src/test.html", content, (err) =>           //appends engineers to html
     err ? console.error(err) : console.log('Engineer Added'));
   })
 
   intArray.forEach(function(intArray){
     let intData = new Intern(intArray.name, intArray.id, intArray.email, intArray.school);
-    let content = team.appendInt(intData);
-    fs.appendFile("./src/test.html", content, (err) =>
+    let content = team.appendInt(intData);  //teamMaker fxn code
+    fs.appendFile("./src/test.html", content, (err) =>       //appends interns to html
     err ? console.error(err) : console.log('Intern Added'));
   })
   
-  final();
+  final();    //adds closing tags for html
 }
 
 function final () {
