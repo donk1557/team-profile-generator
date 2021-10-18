@@ -8,7 +8,7 @@ describe("Engineer", () => {
   });
 
   test("getRole() returns string when called", () => {
-    expect(manager.getRole()).toBe("Engineer");
+    expect(engineer.getRole()).toBe("Engineer");
   });
 
   test("defines getGithub()", () => {
